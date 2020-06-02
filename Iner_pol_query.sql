@@ -1,4 +1,4 @@
--- Create the new polygons 
+-- We had multiple iner polygons inside our polygons, the goal was to find a query removing the iner polygon
 
 SELECT ST_GeomFromText(polygone) as geom
 
@@ -11,6 +11,7 @@ SELECT ST_GeomFromText(polygone) as geom
                 ((ST_dump
                    (st_boundary
                       (ST_MakeValid
+                      -- Transforming the coordinate system in order to calculate the area
                      (ST_Transform
                         (ST_SETSRID
                            (geometry,4326),32631))))).geom) 
